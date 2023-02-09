@@ -29,7 +29,7 @@
     "start": "node src/server/serverProxy.js",
     "proxy": "cross-env REACT_APP_HTTP_ONLY_PROXY=TRUE react-scripts build && nodemon src/server/serverProxy.js",
     "serve": "react-scripts start",
-    "build": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
+    "build": "cross-env react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint:fix": "eslint src/ --fix --max-warnings=0",
