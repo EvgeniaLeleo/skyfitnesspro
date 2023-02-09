@@ -1,5 +1,5 @@
-import { ERRORS } from "./constants"
-import { AuthErrorType } from "./types"
+import { ERRORS } from './constants'
+import { AuthErrorType } from './types'
 
 export const formatString = (text: string, args: string[]) => {
   let res = text
@@ -8,17 +8,23 @@ export const formatString = (text: string, args: string[]) => {
 }
 
 export const getErrorMessage = (
-  error: AuthErrorType, defaultError = 'Неверный логин или пароль'
+  error: AuthErrorType,
+  defaultError = 'Неверный логин или пароль'
 ) => {
-  const testValue: string = ERRORS[error.data.error.message]
+  const testValue: string = ERRORS[error.data?.error.message]
   return testValue || defaultError
 }
 
 export const parseJWT = (token: string) => {
   const base64Url = token.split('.')[1]
-  const base64 = decodeURIComponent(atob(base64Url).split('').map((c) => {
-    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-  }).join(''))
+  const base64 = decodeURIComponent(
+    atob(base64Url)
+      .split('')
+      .map((c) => {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      })
+      .join('')
+  )
 
   return JSON.parse(base64)
 }
@@ -32,7 +38,7 @@ export const getUserEmailFromJWT = (token: string) => {
 }
 
 export const getJWTExpTime = (token: string) => {
-  return new Date(+parseJWT(token).exp*1000)
+  return new Date(+parseJWT(token).exp * 1000)
 }
 
 export const checkJWTExpTime = (token: string) => {
